@@ -16,4 +16,4 @@ export {
     actionHandlers,
     nullValue,
     getRandomlySelectedItemIndexByTags
-}
+};

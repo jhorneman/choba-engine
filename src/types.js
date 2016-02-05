@@ -32,7 +32,7 @@ export function isValidValue(_value, _reportError) {
         return false;
     }
     if (!includes(types, _value.type)) {
-        _reportError('Value type \'' +  _value.type + '\' is not a recognized type.');
+        _reportError('Value type \'' + _value.type + '\' is not a recognized type.');
         return false;
     }
     // TODO: Add per-type value checking (dig out code from previous version of types.js).
@@ -61,7 +61,7 @@ export function convertValueToText(_value, _reportError) {
                 _reportError('scenePart value contains options: this is not allowed.');
             }
             if (_value.value.hasOwnProperty('text')) {
-                result = _value.value['text'];
+                result = _value.value.text;
             } else {
                 _reportError('scenePart value does not contain text: this is not allowed.');
             }

@@ -6,7 +6,7 @@ const defaultScene = {
     text: '',
     options: [],
     desc: undefined
-}
+};
 
 function normalizeScene(_scene) {
     return Object.assign({}, defaultScene, _scene);
@@ -36,7 +36,7 @@ export function evaluateScene(_sceneId, _dynamicState, _context) {
         const sceneDesc = _context.scenes[_sceneId];
         if (sceneDesc.hasOwnProperty('content')) {
             const value = evaluateExpression(
-                sceneDesc['content'],
+                sceneDesc.content,
                 dynamicState,
                 _context
             );
@@ -68,7 +68,7 @@ export function evaluateScene(_sceneId, _dynamicState, _context) {
                     break;
                 }
                 default: {
-                    _context.reportError('evaluateScene: Don\'t know how to handle value of type \'' + value.type +'\'.');
+                    _context.reportError('evaluateScene: Don\'t know how to handle value of type \'' + value.type + '\'.');
                     break;
                 }
             }

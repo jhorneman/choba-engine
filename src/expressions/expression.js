@@ -18,7 +18,7 @@ export function evaluateExpression(_expression, _dynamicState, _context) {
             }
         }
     } else {
-        _context.reportError('Expected an array as the expression, got ' + typeof(_expression) + '.');
+        _context.reportError('Expected an array as the expression, got ' + typeof _expression + '.');
     }
 
     return nullValue;
@@ -29,13 +29,13 @@ export function evaluateArrayOfScenePartExpressions(_expressions, _dynamicState,
         options = [],
         dynamicState = Object.assign({}, _dynamicState);
 
-    for (let i=0; i<_expressions.length; i++) {
+    for (let i = 0; i < _expressions.length; i++) {
         const value = evaluateExpression(_expressions[i], dynamicState, _context);
         switch (value.type) {
             case 'scenePart': {
-                if (value.value.hasOwnProperty('dynamicState')) { dynamicState = value.value['dynamicState']; }
-                if (value.value.hasOwnProperty('text')) { texts.push(value.value['text']); }
-                if (value.value.hasOwnProperty('options')) { options = options.concat(value.value['options']); }
+                if (value.value.hasOwnProperty('dynamicState')) { dynamicState = value.value.dynamicState; }
+                if (value.value.hasOwnProperty('text')) { texts.push(value.value.text); }
+                if (value.value.hasOwnProperty('options')) { options = options.concat(value.value.options); }
                 break;
             }
             case 'options': {
@@ -59,9 +59,9 @@ export function evaluateArrayOfScenePartExpressions(_expressions, _dynamicState,
         type: 'scenePart',
         value: {}
     };
-    if (texts.length > 0) { returnValue.value['text'] = texts.join(''); }
-    if (options.length > 0) { returnValue.value['options'] = [].concat.apply([], options); }
-    if (!isEqual(dynamicState, _dynamicState)) { returnValue.value['dynamicState'] = dynamicState; }
+    if (texts.length > 0) { returnValue.value.text = texts.join(''); }
+    if (options.length > 0) { returnValue.value.options = [].concat.apply([], options); }
+    if (!isEqual(dynamicState, _dynamicState)) { returnValue.value.dynamicState = dynamicState; }
     return returnValue;
 }
 

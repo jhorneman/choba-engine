@@ -53,7 +53,7 @@ export function isValidContext(_context) {
     return {
         isValid: errorMessages.length === 0,
         errorMessages: errorMessages
-    }
+    };
 }
 
 export function getRandomInt(_context, _upper) {
@@ -63,5 +63,5 @@ export function getRandomInt(_context, _upper) {
     if (!isFinite(_upper)) {
         throw new Error('getRandomInt: _upper parameter is not a number.');
     }
-    return (_upper > 0) ? Random.integer(0, _upper-1)(_context['_rng']) : 0;
+    return (_upper > 0) ? Random.integer(0, _upper - 1)(_context._rng) : 0;
 }

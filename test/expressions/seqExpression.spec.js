@@ -21,7 +21,7 @@ describe('sequence expression evaluation', () => {
 
     it('deals with badly nested data', () => {
         let value = evaluateSeqExpression([[
-            ['text', 'A'],
+            ['text', 'A']
         ]], dynamicState, context);
         expect(value.type).toEqual('scenePart');
         expect(value.value).toEqual({});
@@ -47,7 +47,7 @@ describe('sequence expression evaluation', () => {
             ['text', 'A'],
             ['text', 'B'],
             buildGotoOptionExpression('sceneC'),
-            buildGotoOptionExpression('sceneD'),
+            buildGotoOptionExpression('sceneD')
         ], dynamicState, context);
         expect(reportError).toNotHaveBeenCalled();
         expect(value.type).toEqual('scenePart');

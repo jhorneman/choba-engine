@@ -37,7 +37,7 @@ describe('expression evaluation', () => {
         expect(reportError.calls[0].arguments).toEqual(['Unknown operator \'' + wrongOperator + '\'.']);
     });
 
-    it ('deals with an expression returning an invalid value', () => {
+    it('deals with an expression returning an invalid value', () => {
         const brokenOperator = 'broken';
 
         let evaluateBrokenExpressionSpy = expect.createSpy().andReturn(0);
@@ -58,7 +58,7 @@ describe('expression evaluation', () => {
         // The seq operator's arguments don't need to be put into another array.
         // The expression is already an array.
         let value = evaluateExpression(['seq', [
-            ['text', 'A'],
+            ['text', 'A']
         ]], dynamicState, context);
         expect(value).toEqual(emptyScenePart);
         expect(reportError.calls.length).toEqual(1);

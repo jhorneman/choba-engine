@@ -42,6 +42,7 @@
 
     "rules": {
         "quotes": [2, "single"],
+        "jsx-quotes": [2, "prefer-single"], // Enforce quote style for JSX attributes
         "no-console": 0,
         "no-underscore-dangle": 0,
         "key-spacing": 0,
@@ -190,7 +191,6 @@
         // React specific linting rules for ESLint
         //
         "react/display-name": 0, // Prevent missing displayName in a React component definition
-        "react/jsx-quotes": [1, "single", "avoid-escape"], // Enforce quote style for JSX attributes
         "react/jsx-no-undef": 2, // Disallow undeclared variables in JSX
         "react/jsx-sort-props": 0, // Enforce props alphabetical sorting
         "react/jsx-uses-react": 2, // Prevent React to be incorrectly marked as unused

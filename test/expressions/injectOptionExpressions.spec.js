@@ -16,7 +16,7 @@ describe('inject option expression evaluation', () => {
         const scene = {
             tags: ['a', 'b'],
             leadIn: ['text', testLeadIn]
-        }
+        };
         context.scenes = { 'aScene': scene };
         let value = evaluateInjectOptionExpression(['c'], dynamicState, context);
         expect(value).toEqual(nullValue);
@@ -27,7 +27,7 @@ describe('inject option expression evaluation', () => {
     it('deals with scenes without a lead-in', () => {
         const scene = {
             tags: ['a', 'b']
-        }
+        };
         context.scenes = { 'aScene': scene };
         let value = evaluateInjectOptionExpression(['a', 'b'], dynamicState, context);
         expect(value).toEqual(nullValue);
@@ -39,7 +39,7 @@ describe('inject option expression evaluation', () => {
         const scene = {
             tags: ['a', 'b'],
             leadIn: ['null']
-        }
+        };
         context.scenes = { 'aScene': scene };
         let value = evaluateInjectOptionExpression(['a', 'b'], dynamicState, context);
         expect(value).toEqual(nullValue);
@@ -50,7 +50,7 @@ describe('inject option expression evaluation', () => {
     it('deals with a non-array as a tag list', () => {
         const scene = {
             tags: ['a', 'b']
-        }
+        };
         context.scenes = { 'aScene': scene };
         let value = evaluateInjectOptionExpression(0, dynamicState, context);
         expect(value).toEqual(nullValue);
@@ -62,7 +62,7 @@ describe('inject option expression evaluation', () => {
     it('deals with an empty tag list', () => {
         const scene = {
             tags: ['a', 'b']
-        }
+        };
         context.scenes = { 'aScene': scene };
         let value = evaluateInjectOptionExpression([], dynamicState, context);
         expect(value).toEqual(nullValue);
@@ -73,7 +73,7 @@ describe('inject option expression evaluation', () => {
     it('deals with bad tags', () => {
         const scene = {
             tags: ['a', 'b']
-        }
+        };
         context.scenes = { 'aScene': scene };
         let value = evaluateInjectOptionExpression([undefined, {}], dynamicState, context);
         expect(value).toEqual(nullValue);
@@ -86,7 +86,7 @@ describe('inject option expression evaluation', () => {
     it('deals with badly nested parameters', () => {
         const scene = {
             tags: ['a', 'b']
-        }
+        };
         context.scenes = { 'aScene': scene };
         let value = evaluateInjectOptionExpression([['a', 'b']], dynamicState, context);
         expect(value).toEqual(nullValue);
@@ -100,7 +100,7 @@ describe('inject option expression evaluation', () => {
             tags: ['a', 'b'],
             leadIn: ['text', testLeadIn],
             content: ['text', 'Hello world']
-        }
+        };
         context.scenes = { 'aScene': scene };
         let value = evaluateInjectOptionExpression(['a', 'b'], dynamicState, context);
         expect(reportError).toNotHaveBeenCalled();

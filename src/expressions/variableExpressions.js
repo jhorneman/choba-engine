@@ -42,7 +42,7 @@ export function evaluateSetExpression(_parameters, _dynamicState, _context) {
                     type: newValue.type,
                     value: newValue.value
                 };
-                _dynamicState.vars = newVars
+                _dynamicState.vars = newVars;
                 return {
                     type: 'dynamicState',
                     value: _dynamicState

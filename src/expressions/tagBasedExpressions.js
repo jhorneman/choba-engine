@@ -1,6 +1,5 @@
 import isString from 'lodash/isString';
-import { getRandomlySelectedItemIndexByTags,
-         getRandomlySelectedItemIndicesByTags } from '../tags';
+import { getRandomlySelectedItemIndexByTags } from '../tags';
 import { nullValue } from '../types';
 import { evaluateExpression,
          evaluateExpressionThatResultsInText } from './expression';
@@ -19,10 +18,10 @@ export function evaluateTags(_tags, _dynamicState, _context) {
             }
             _context.reportError('Tag \'' + _tag + '\' is neither a string nor an expression.');
             return undefined;
-        })
+        });
         tags = tags.filter(_tag => _tag);
     } else {
-        _context.reportError('Expected an array as the tag list, got ' + typeof(_tags) + '.');
+        _context.reportError('Expected an array as the tag list, got ' + typeof _tags + '.');
     }
 
     return tags;
@@ -37,7 +36,7 @@ export function evaluateInjectOptionExpression(_parameters, _dynamicState, _cont
             // TODO: Maybe abstract away access of item.
             const sceneDesc = _context.scenes[sceneId];
             if (sceneDesc.hasOwnProperty('leadIn')) {
-                const leadInText = evaluateExpressionThatResultsInText(sceneDesc['leadIn'], _dynamicState, _context);
+                const leadInText = evaluateExpressionThatResultsInText(sceneDesc.leadIn, _dynamicState, _context);
                 if (leadInText.length > 0) {
                     return {
                         type: 'options',
@@ -73,7 +72,7 @@ export function evaluateInjectBlockExpression(_parameters, _dynamicState, _conte
             // TODO: Either turn blocks into array or abstract away access of item.
             const block = _context.blocks[blockIndex];
             if (block.hasOwnProperty('content')) {
-                return evaluateExpression(block['content'], _dynamicState, _context);  
+                return evaluateExpression(block.content, _dynamicState, _context);
             } else {
                 _context.reportError('Block has no content field.');
             }

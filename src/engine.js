@@ -1,4 +1,3 @@
-import isEqual from 'lodash/isEqual';
 import { buildContext } from './context';
 import { evaluateScene } from './expressions/sceneExpression';
 import { handleAction } from './actions';
@@ -26,8 +25,8 @@ export function restartGame(context) {
 export function executeOption(dynamicState, context, _option) {
     const oldSceneId = dynamicState.currentSceneId;
     let newDynamicState = handleAction(
-        _option['action'],
-        _option['parameters'],
+        _option.action,
+        _option.parameters,
         dynamicState,
         context
     );
@@ -42,7 +41,7 @@ export function executeOption(dynamicState, context, _option) {
 
 // (Function is only exported for testing: it is not called outside this module.)
 export function buildCurrentScene(dynamicState, context) {
-    let {scene: newScene, dynamicState: newDynamicState} = evaluateScene(dynamicState['currentSceneId'], dynamicState, context);
+    let {scene: newScene, dynamicState: newDynamicState} = evaluateScene(dynamicState.currentSceneId, dynamicState, context);
     return {
         newScene: newScene,
         dynamicState: newDynamicState,

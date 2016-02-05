@@ -87,14 +87,15 @@ export function evaluateLtEqExpression(_parameters, _dynamicState, _context) {
 
 
 export function evaluateOrExpression(_parameters, _dynamicState, _context) {
-    for (let i=0; i<_parameters.length; i++) {
+    for (let i = 0; i < _parameters.length; i++) {
         if (isTrueValue(evaluateExpression(_parameters[i], _dynamicState, _context))) { return trueValue; }
     }
     return falseValue;
 }
 
+
 export function evaluateAndExpression(_parameters, _dynamicState, _context) {
-    for (let i=0; i<_parameters.length; i++) {
+    for (let i = 0; i < _parameters.length; i++) {
         if (!isTrueValue(evaluateExpression(_parameters[i], _dynamicState, _context))) { return falseValue; }
     }
     return trueValue;

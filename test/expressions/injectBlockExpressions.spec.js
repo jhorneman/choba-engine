@@ -16,7 +16,7 @@ describe('inject block expression evaluation', () => {
         const block = {
             tags: ['a', 'b'],
             content: ['text', testText]
-        }
+        };
         context.blocks = [ block ];
         let value = evaluateInjectBlockExpression(['c'], dynamicState, context);
         expect(value).toEqual(nullValue);
@@ -27,7 +27,7 @@ describe('inject block expression evaluation', () => {
     it('deals with blocks without content', () => {
         const block = {
             tags: ['a', 'b']
-        }
+        };
         context.blocks = [ block ];
         let value = evaluateInjectBlockExpression(['a', 'b'], dynamicState, context);
         expect(value).toEqual(nullValue);
@@ -38,7 +38,7 @@ describe('inject block expression evaluation', () => {
     it('deals with a non-array as a tag list', () => {
         const block = {
             tags: ['a', 'b']
-        }
+        };
         context.blocks = [ block ];
         let value = evaluateInjectBlockExpression(0, dynamicState, context);
         expect(value).toEqual(nullValue);
@@ -50,7 +50,7 @@ describe('inject block expression evaluation', () => {
     it('deals with an empty tag list', () => {
         const block = {
             tags: ['a', 'b']
-        }
+        };
         context.blocks = [ block ];
         let value = evaluateInjectBlockExpression([], dynamicState, context);
         expect(value).toEqual(nullValue);
@@ -61,7 +61,7 @@ describe('inject block expression evaluation', () => {
     it('deals with bad tags', () => {
         const block = {
             tags: ['a', 'b']
-        }
+        };
         context.blocks = [ block ];
         let value = evaluateInjectBlockExpression([undefined, {}], dynamicState, context);
         expect(value).toEqual(nullValue);
@@ -74,7 +74,7 @@ describe('inject block expression evaluation', () => {
     it('deals with badly nested parameters', () => {
         const block = {
             tags: ['a', 'b']
-        }
+        };
         context.blocks = [ block ];
         let value = evaluateInjectBlockExpression([['a', 'b']], dynamicState, context);
         expect(value).toEqual(nullValue);
@@ -87,7 +87,7 @@ describe('inject block expression evaluation', () => {
         const block = {
             tags: ['a', 'b'],
             content: ['text', testText]
-        }
+        };
         context.blocks = [ block ];
         let value = evaluateInjectBlockExpression(['a', 'b'], dynamicState, context);
         expect(value).toEqual({
@@ -101,7 +101,7 @@ describe('inject block expression evaluation', () => {
         const block = {
             tags: ['a', 'b'],
             content: ['text', testText]
-        }
+        };
         context.blocks = [ block ];
         let value = evaluateInjectBlockExpression(['a', ['literal', {type: 'string', value: 'b'}]], dynamicState, context);
         expect(value).toEqual({

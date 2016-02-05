@@ -5,10 +5,10 @@ import { setUpDynamicStateAndContextAndReportErrorSpy } from './testHelpers';
 
 
 describe('general action handling', () => {
-    let dynamicState, context, reportError;
+    let context, reportError;
 
     beforeEach('set up common test variables', function() {
-        ({dynamicState, context, reportError} = setUpDynamicStateAndContextAndReportErrorSpy());
+        ({context, reportError} = setUpDynamicStateAndContextAndReportErrorSpy());
     });
 
     it('deals with a missing context', () => {
@@ -42,10 +42,10 @@ describe('general action handling', () => {
 
 
 describe('goto action handling', () => {
-    let dynamicState, context, reportError;
+    let context, reportError;
 
     beforeEach('set up common test variables', function() {
-        ({dynamicState, context, reportError} = setUpDynamicStateAndContextAndReportErrorSpy());
+        ({context, reportError} = setUpDynamicStateAndContextAndReportErrorSpy());
     });
 
     it('handles goto actions correctly', () => {

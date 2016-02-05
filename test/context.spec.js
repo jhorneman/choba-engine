@@ -21,8 +21,8 @@ describe('isValidContext', () => {
 
     it('deals with the context missing certain properties', () => {
         let context = buildContext();
-        delete context['reportError'];
-        delete context['expressionEvaluators'];
+        delete context.reportError;
+        delete context.expressionEvaluators;
         let { isValid, errorMessages } = isValidContext(context);
         expect(isValid).toBe(false);
         expect(errorMessages).toEqual(['Context is missing reportError property.',
@@ -68,7 +68,7 @@ describe('getRandomInt', () => {
 
     // TODO: File an issue in random-js.
     // it('returns a random number that is at the top of the given range', () => {
-    //     const context = buildContext({ 
+    //     const context = buildContext({
     //         // Maximum value in 32 bits.
     //         // See https://github.com/ckknight/random-js#how-does-randomjs-alleviate-these-problems
     //         // Anything higher than 0xffffff00 causes both random-js and mocha to hang.

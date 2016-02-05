@@ -20,7 +20,7 @@ describe('oneOf expression evaluation', () => {
     it('deals with a single parameter', () => {
         const testText = 'Hello world';
         let value = evaluateOneOfExpression([
-            ['text', testText],
+            ['text', testText]
         ], dynamicState, context);
         expect(value.type).toEqual('string');
         expect(value.value).toEqual(testText);
@@ -33,7 +33,7 @@ describe('oneOf expression evaluation', () => {
         let value = evaluateOneOfExpression([
             ['text', testText],
             ['text', 'a'],
-            ['text', 'b'],
+            ['text', 'b']
         ], dynamicState, context);
         expect(value.type).toEqual('string');
         expect(value.value).toEqual(testText);

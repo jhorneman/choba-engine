@@ -41,7 +41,7 @@ export function evaluateOneOfExpression(_parameters, _dynamicState, _context) {
 }
 
 export function evaluateLiteralExpression(_parameters, _dynamicState, _context) {
-    return isValidValue(_parameters[0], _context.reportError) ? _parameters[0] : nullValue; 
+    return isValidValue(_parameters[0], _context.reportError) ? _parameters[0] : nullValue;
 }
 
 export function evaluateNullExpression() {

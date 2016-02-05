@@ -5,7 +5,7 @@ import { setUpDynamicStateAndContextAndReportErrorSpy } from '../testHelpers';
 
 
 describe('var expression evaluation', () => {
-    let dynamicState, context, reportError;
+    let context, reportError;
     const testVars = {
         testInt: {
             type: 'integer',
@@ -22,7 +22,7 @@ describe('var expression evaluation', () => {
     };
 
     beforeEach('set up common test variables', function() {
-        ({dynamicState, context, reportError} = setUpDynamicStateAndContextAndReportErrorSpy());
+        ({context, reportError} = setUpDynamicStateAndContextAndReportErrorSpy());
     });
 
     it('deals with too few parameters', () => {

@@ -26,12 +26,12 @@ export function handleAction(_actionType, _parameters, _dynamicState, _context) 
     return dynamicState;
 }
 
-export function handleGotoAction(_parameters, _dynamicState, _context) {
+export function handleGotoAction(_parameters, _dynamicState) {
     return Object.assign({}, _dynamicState, {
         currentSceneId: _parameters[0]
     });
 }
 
-export function handleRestartAction(_parameters, _dynamicState, _context) {
+export function handleRestartAction() {
     return getInitialGameState();
 }

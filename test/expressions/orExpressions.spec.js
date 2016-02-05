@@ -1,5 +1,4 @@
 import expect from 'expect';
-import { nullValue } from '../../src/types';
 import { evaluateOrExpression } from '../../src/expressions/logicalExpressions';
 import { setUpDynamicStateAndContextAndReportErrorSpy } from '../testHelpers';
 

@@ -25,12 +25,12 @@ export function getRandomlySelectedItemIndexByTags(_collection, _desiredTags, _t
 
 export function getRandomlySelectedItemIndicesByTags(_collection, _desiredTags, _tagState, _context, _nrItemsToGet) {
     if (!isObject(_collection) && !Array.isArray(_collection)) {
-        _context.reportError('Expected an object or array as the collection, got ' + typeof(_collection) + '.');
+        _context.reportError('Expected an object or array as the collection, got ' + typeof _collection + '.');
         return undefined;
     }
 
     if (!Array.isArray(_desiredTags)) {
-        _context.reportError('Expected an array as the desired tags, got ' + typeof(_desiredTags) + '.');
+        _context.reportError('Expected an array as the desired tags, got ' + typeof _desiredTags + '.');
         return undefined;
     }
 
@@ -54,11 +54,11 @@ export function getRandomlySelectedItemIndicesByTags(_collection, _desiredTags, 
     }
 
     function buildNewDeckState() {
-        Random.shuffle(_context['_rng'], deck);
+        Random.shuffle(_context._rng, deck);
         return {
             index: 0,
             shuffleTable: deck
-        }
+        };
     }
 
     let deckKey = keyFromDesiredTags(_desiredTags),

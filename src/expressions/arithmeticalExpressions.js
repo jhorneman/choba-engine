@@ -25,7 +25,7 @@ function evaluatePlusMinusExpression(_parameters, _dynamicState, _context, _oper
     }
 
     if ((parameterValue1.type !== 'integer') && (parameterValue1.type !== 'string')) {
-        _context.reportError(_operatorName + ': Only integers and strings are supported, not ' + type + '.');
+        _context.reportError(_operatorName + ': Only integers and strings are supported, not ' + parameterValue1.type + '.');
         return nullValue;
     }
 
