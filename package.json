@@ -1,0 +1,59 @@
+{
+  "name": "choba-engine",
+  "version": "0.0.1",
+  "description": "A choice-based interactive fiction engine.",
+  "main": "lib/index.js",
+  "jsnext:main": "src/index.js",
+  "files": [
+    "dist",
+    "lib",
+    "src"
+  ],
+  "scripts": {
+    "clean": "rimraf lib dist coverage",
+    "lint": "./node_modules/.bin/eslint src test",
+    "test": "./node_modules/mocha/bin/mocha --recursive",
+    "test:watch": "npm test -- --watch",
+    "test:cover": "./node_modules/.bin/babel-node ./node_modules/isparta/bin/isparta cover ./node_modules/mocha/bin/_mocha -- --recursive",
+    "check:lib": "npm run lint && npm run test",
+    "build:lib": "babel src --out-dir lib",
+    "prepublish": "npm run clean && npm run check:lib && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jhorneman/choba-engine.git"
+  },
+  "keywords": [
+    "interactive-fiction"
+  ],
+  "authors": [
+    "Jurie Horneman <jurie@jurie.org> (http://www.intelligent-artifice.com)"
+  ],
+  "license": "MIT",
+  "url": "https://github.com/jhorneman/choba-engine/blob/master/LICENSE",
+  "bugs": {
+    "url": "https://github.com/jhorneman/choba-engine/issues"
+  },
+  "homepage": "https://github.com/jhorneman/choba-engine",
+  "devDependencies": {
+    "babel-cli": "^6.4.5",
+    "babel-core": "^6.4.0",
+    "babel-eslint": "^4.1.8",
+    "babel-loader": "^6.2.1",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babel-register": "^6.4.3",
+    "eslint": "^1.10.3",
+    "eslint-plugin-react": "^3.16.1",
+    "expect": "^1.13.4",
+    "isparta": "^4.0.0",
+    "mocha": "^2.3.4",
+    "rimraf": "^2.5.1",
+    "webpack": "^1.12.11",
+    "webpack-dev-server": "^1.14.1"
+  },
+  "dependencies": {
+    "lodash": "^4.0.0",
+    "random-js": "^1.0.8"
+  }
+}
