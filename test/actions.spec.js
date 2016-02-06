@@ -32,9 +32,10 @@ describe('general action handling', () => {
         expect(reportError.calls[0].arguments).toEqual(['Unknown action type \'' + wrongType + '\'.']);
     });
 
+    // TODO: Write more tests for passing bad parameters. E.g. object, string.
     it('handles actions correctly', () => {
         let originalDynamicState = {currentSceneId: 'first'};
-        let newDynamicState = handleAction('goto', {nextSceneId: 'second'}, originalDynamicState, context);
+        let newDynamicState = handleAction('goto', ['second'], originalDynamicState, context);
         expect(newDynamicState).toEqual({currentSceneId: 'second'});
         expect(reportError).toNotHaveBeenCalled();
     });
@@ -48,9 +49,10 @@ describe('goto action handling', () => {
         ({context, reportError} = setUpDynamicStateAndContextAndReportErrorSpy());
     });
 
+    // TODO: Write more tests for passing bad parameters. E.g. object, string.
     it('handles goto actions correctly', () => {
         let originalDynamicState = {currentSceneId: 'first'};
-        let newDynamicState = handleGotoAction({nextSceneId: 'second'}, originalDynamicState, context);
+        let newDynamicState = handleGotoAction(['second'], originalDynamicState, context);
         expect(newDynamicState).toEqual({currentSceneId: 'second'});
         expect(reportError.calls.length).toEqual(0);
     });

@@ -15,113 +15,138 @@ describe('scene evaluation', () => {
 
     const emptyScene = {
         text: '',
-        options: []
+        options: [],
+        desc: undefined
     };
 
     it('deals with no context', () => {
-        let scene = evaluateScene(sceneId, dynamicState, undefined);
+        let { scene, dynamicState: newDynamicState } = evaluateScene(sceneId, dynamicState, undefined);
         expect(scene).toEqual(emptyScene);
+        expect(newDynamicState).toBe(dynamicState);
     });
 
     it('deals with a context without reportError', () => {
         delete context.reportError;
-        let scene = evaluateScene(sceneId, dynamicState, context);
+        let { scene, dynamicState: newDynamicState } = evaluateScene(sceneId, dynamicState, context);
         expect(scene).toEqual(emptyScene);
+        expect(newDynamicState).toBe(dynamicState);
     });
 
     it('deals with no scenes', () => {
         delete context.scenes;
-        let scene = evaluateScene(sceneId, dynamicState, context);
+        let { scene, dynamicState: newDynamicState } = evaluateScene(sceneId, dynamicState, context);
         expect(scene).toEqual(emptyScene);
         expect(reportError.calls.length).toEqual(1);
         expect(reportError.calls[0].arguments).toEqual(['Context is missing scenes property.']);
+        expect(newDynamicState).toBe(dynamicState);
     });
 
     it('deals with a non-existent scene', () => {
-        let scene = evaluateScene(sceneId, dynamicState, context);
+        let { scene, dynamicState: newDynamicState } = evaluateScene(sceneId, dynamicState, context);
         expect(scene).toEqual(emptyScene);
         expect(reportError.calls.length).toEqual(1);
         expect(reportError.calls[0].arguments).toEqual(['Unknown scene \'' + sceneId + '\'.']);
+        expect(newDynamicState).toBe(dynamicState);
     });
 
     it('deals with a scene without content', () => {
-        context.scenes[sceneId] = [];
-        let scene = evaluateScene(sceneId, dynamicState, context);
-        expect(scene).toEqual(emptyScene);
+        const sceneDesc = [];
+        context.scenes[sceneId] = sceneDesc;
+        let { scene, dynamicState: newDynamicState } = evaluateScene(sceneId, dynamicState, context);
+        expect(scene).toEqual({text: '', options: [], desc: sceneDesc});
         expect(reportError.calls.length).toEqual(1);
         expect(reportError.calls[0].arguments).toEqual(['Scene \'' + sceneId + '\' has no content field.']);
+        expect(newDynamicState).toBe(dynamicState);
     });
 
     it('builds a scene with text', () => {
-        let sceneText = 'YAY!';
-        context.scenes[sceneId] = {
+        const sceneText = 'YAY!';
+        const sceneDesc = {
             content: ['text', sceneText]
         };
+        context.scenes[sceneId] = sceneDesc;
         reportError = expect.spyOn(context, 'reportError');
-        let scene = evaluateScene(sceneId, dynamicState, context);
+        let { scene, dynamicState: newDynamicState } = evaluateScene(sceneId, dynamicState, context);
         expect(reportError).toNotHaveBeenCalled();
-        expect(scene).toEqual({text: sceneText, options: []});
+        expect(scene).toEqual({text: sceneText, options: [], desc: sceneDesc});
+        expect(newDynamicState).toBe(dynamicState);
     });
 
     it('builds a scene with options', () => {
         const nextSceneId = 'sceneD';
-        context.scenes[sceneId] = {
+        const sceneDesc = {
             content: buildGotoOptionExpression(nextSceneId)
         };
+        context.scenes[sceneId] = sceneDesc;
         reportError = expect.spyOn(context, 'reportError');
-        let scene = evaluateScene(sceneId, dynamicState, context);
+        let { scene, dynamicState: newDynamicState } = evaluateScene(sceneId, dynamicState, context);
         expect(reportError).toNotHaveBeenCalled();
-        expect(scene).toEqual({text: '', options: [
-            {text: 'Go to ' + nextSceneId, action: 'goto', parameters: [nextSceneId]}
-        ]});
+        expect(scene).toEqual({
+            text: '',
+            options: [
+                {text: 'Go to ' + nextSceneId, action: 'goto', parameters: [nextSceneId]}
+            ],
+            desc: sceneDesc
+        });
+        expect(newDynamicState).toBe(dynamicState);
     });
 
     it('builds a scene with dynamic state', () => {
         let { vars, setCommand, expectedVars } = setUpSetCommandAndVars();
-        context.scenes[sceneId] = {
+        const sceneDesc = {
             content: setCommand
         };
+        context.scenes[sceneId] = sceneDesc;
         reportError = expect.spyOn(context, 'reportError');
-        let scene = evaluateScene(sceneId, {vars: vars}, context);
+        let { scene, dynamicState: newDynamicState } = evaluateScene(sceneId, {vars: vars}, context);
         expect(reportError).toNotHaveBeenCalled();
-        expect(scene).toEqual({text: '', options: [], dynamicState: {vars: expectedVars}});
+        expect(scene).toEqual({text: '', options: [], desc: sceneDesc});
+        expect(newDynamicState).toEqual({vars: expectedVars});
     });
 
     it('deals with expressions returning types it cannot handle', () => {
-        context.scenes[sceneId] = {
+        const sceneDesc = {
             content: ['literal', { type: 'integer', value: 0 }]
         };
+        context.scenes[sceneId] = sceneDesc;
         reportError = expect.spyOn(context, 'reportError');
-        let scene = evaluateScene(sceneId, dynamicState, context);
+        let { scene, dynamicState: newDynamicState } = evaluateScene(sceneId, dynamicState, context);
         expect(reportError.calls.length).toEqual(1);
         expect(reportError.calls[0].arguments).toEqual(['evaluateScene: Don\'t know how to handle value of type \'integer\'.']);
-        expect(scene).toEqual({text: '', options: []});
+        expect(scene).toEqual({text: '', options: [], desc: sceneDesc});
+        expect(newDynamicState).toBe(dynamicState);
     });
 
     it('deals with expressions returning null', () => {
-        context.scenes[sceneId] = {
+        const sceneDesc = {
             content: ['null']
         };
+        context.scenes[sceneId] = sceneDesc;
         reportError = expect.spyOn(context, 'reportError');
-        let scene = evaluateScene(sceneId, dynamicState, context);
+        let { scene, dynamicState: newDynamicState } = evaluateScene(sceneId, dynamicState, context);
         expect(reportError).toNotHaveBeenCalled();
-        expect(scene).toEqual({text: '', options: []});
+        expect(scene).toEqual({text: '', options: [], desc: sceneDesc});
+        expect(newDynamicState).toBe(dynamicState);
     });
 
     it('deals with expressions returning scene parts', () => {
         const sceneText = 'YAY!';
         const nextSceneId = 'sceneD';
-        context.scenes[sceneId] = {
+        const sceneDesc = {
             content: ['seq',
                 ['text', sceneText],
                 buildGotoOptionExpression(nextSceneId)
             ]
         };
+        context.scenes[sceneId] = sceneDesc;
         reportError = expect.spyOn(context, 'reportError');
-        let scene = evaluateScene(sceneId, dynamicState, context);
+        let { scene, dynamicState: newDynamicState } = evaluateScene(sceneId, dynamicState, context);
         expect(reportError).toNotHaveBeenCalled();
-        expect(scene).toEqual({text: sceneText, options: [
+        expect(scene.text).toEqual(sceneText);
+        expect(scene.options).toEqual([
             {text: 'Go to ' + nextSceneId, action: 'goto', parameters: [nextSceneId]}
-        ]});
+        ]);
+        expect(scene.desc).toEqual(sceneDesc);
+        expect(newDynamicState).toBe(dynamicState);
     });
 });

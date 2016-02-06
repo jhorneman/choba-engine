@@ -38,8 +38,7 @@ describe('sequence expression evaluation', () => {
         expect(value.value).toEqual({
             text: 'A'
         });
-        expect(reportError.calls.length).toEqual(1);
-        expect(reportError.calls[0].arguments).toEqual(['evaluateAndMergeArrayOfScenePartExpressions: Don\'t know how to handle value of type \'boolean\'.']);
+        expect(reportError.calls.length).toEqual(0);
     });
 
     it('evaluates and combines texts and options', () => {

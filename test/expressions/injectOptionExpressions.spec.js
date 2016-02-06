@@ -44,7 +44,7 @@ describe('inject option expression evaluation', () => {
         let value = evaluateInjectOptionExpression(['a', 'b'], dynamicState, context);
         expect(value).toEqual(nullValue);
         expect(reportError.calls.length).toEqual(1);
-        expect(reportError.calls[0].arguments).toEqual(['Don\'t know how to handle lead-in values of type \'null\'.']);
+        expect(reportError.calls[0].arguments).toEqual(['Scene has empty lead-in.']);
     });
 
     it('deals with a non-array as a tag list', () => {
@@ -105,6 +105,6 @@ describe('inject option expression evaluation', () => {
         let value = evaluateInjectOptionExpression(['a', 'b'], dynamicState, context);
         expect(reportError).toNotHaveBeenCalled();
         expect(value.type).toEqual('options');
-        expect(value.value).toEqual([{text: testLeadIn, action: 'goto', parameters: {nextSceneId: 'aScene'}}]);
+        expect(value.value).toEqual([{text: testLeadIn, action: 'goto', parameters: ['aScene']}]);
     });
 });
