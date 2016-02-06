@@ -73,12 +73,13 @@ export function evaluateScene(_sceneId, _dynamicState, _context) {
                 }
             }
 
-            // Add reference to scene descriptor.
-            scene.desc = sceneDesc;
-
         } else {
             _context.reportError('Scene \'' + _sceneId + '\' has no content field.');
         }
+
+        // Add reference to scene descriptor.
+        scene.desc = sceneDesc;
+
     } else {
         _context.reportError('Unknown scene \'' + _sceneId + '\'.');
     }
