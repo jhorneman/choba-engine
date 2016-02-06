@@ -5,9 +5,7 @@
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
   "files": [
-    "dist",
-    "lib",
-    "src"
+    "lib"
   ],
   "scripts": {
     "clean": "rimraf lib dist coverage",
