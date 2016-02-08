@@ -3,8 +3,8 @@ import cloneDeep from 'lodash/cloneDeep';
 import { buildContext } from '../src/context';
 
 
-export function setUpDynamicStateAndContextAndReportErrorSpy() {
-    let context = buildContext({reportError: () => {}});
+export function setUpDynamicStateAndContextAndReportErrorSpy(_context = undefined) {
+    let context = buildContext(_context);
     let reportErrorSpy = expect.spyOn(context, 'reportError');
     return {
         dynamicState: { vars: {}, tagState: {} },
