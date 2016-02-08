@@ -1,18 +1,16 @@
-import { buildContext } from './context';
 import { evaluateScene } from './expressions/sceneExpression';
 import { handleAction } from './actions';
 
 
-function getInitialDynamicState(_context) {
-    return Object.assign({}, {
+export function getInitialDynamicState(_context) {
+    let dynamicState = Object.assign({}, {
         currentSceneId: _context.firstSceneId,
+        previousSceneId: '',
         tagState: {},
-        vars: _context.initialVars
+        vars: Object.assign({}, _context.initialVars)
     });
-}
-
-export function initializeGame(_context) {
-    return restartGame(buildContext(_context));
+    dynamicState.vars.currentSceneId.value = dynamicState.currentSceneId;
+    return dynamicState;
 }
 
 export function restartGame(context) {
@@ -32,8 +30,9 @@ export function executeOption(dynamicState, context, _option) {
     );
     // Special variable treatment.
     if (oldSceneId !== newDynamicState.currentSceneId) {
-        newDynamicState.vars.currentsceneId = newDynamicState.currentSceneId;
-        newDynamicState.vars.previousSceneId = oldSceneId;
+        newDynamicState.previousSceneId = oldSceneId;
+        newDynamicState.vars.currentSceneId.value = newDynamicState.currentSceneId;
+        newDynamicState.vars.previousSceneId.value = oldSceneId;
     }
     // Every option will result in rebuilding the current scene.
     return buildCurrentScene(newDynamicState, context);
@@ -44,7 +43,6 @@ export function buildCurrentScene(dynamicState, context) {
     let {scene: newScene, dynamicState: newDynamicState} = evaluateScene(dynamicState.currentSceneId, dynamicState, context);
     return {
         newScene: newScene,
-        dynamicState: newDynamicState,
-        context: context
+        dynamicState: newDynamicState
     };
 }

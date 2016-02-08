@@ -1,11 +1,5 @@
 import isObject from './isObject';
-import { getInitialGameState } from './engine';
-
-
-export const actionHandlers = {
-    'goto': handleGotoAction,
-    'restart': handleRestartAction
-};
+import { getInitialDynamicState } from './engine';
 
 
 export function handleAction(_actionType, _parameters, _dynamicState, _context) {
@@ -33,5 +27,5 @@ export function handleGotoAction(_parameters, _dynamicState) {
 }
 
 export function handleRestartAction() {
-    return getInitialGameState();
+    return getInitialDynamicState();
 }

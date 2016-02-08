@@ -6,7 +6,7 @@ import { setUpDynamicStateAndContextAndReportErrorSpy,
 
 
 describe('scene evaluation', () => {
-    let sceneId = 'aScene';
+    const sceneId = 'aScene';
     let dynamicState, context, reportError;
 
     beforeEach('set up common test variables', function() {

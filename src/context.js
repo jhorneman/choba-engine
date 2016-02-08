@@ -1,8 +1,9 @@
 import Random from 'random-js';
 import isFinite from 'lodash/isFinite';
+import cloneDeep from 'lodash/cloneDeep';
 import isObject from './isObject';
 import { expressionEvaluators } from './expressions/standardExpressionEvaluators';
-import { actionHandlers } from './actions';
+import { actionHandlers } from './standardActionHandlers';
 
 
 const defaultContext = {
@@ -20,7 +21,7 @@ const defaultContext = {
         }
     },
     scenes: {},
-    blocks: {},
+    blocks: [],
     reportError: _message => console.error(_message),
     _rng: Random.engines.mt19937().autoSeed(),
     expressionEvaluators: expressionEvaluators,
@@ -28,12 +29,7 @@ const defaultContext = {
 };
 
 export function buildContext(_context = {}) {
-    // TODO: Figure out why the following is necessary.
-    defaultContext.actionHandlers = actionHandlers;
-    let newContext = Object.assign({}, defaultContext, _context);
-    if (_context.hasOwnProperty('initialVars')) {
-        newContext.initialVars = Object.assign({}, defaultContext.initialVars, _context.initialVars);
-    }
+    let newContext = Object.assign({}, cloneDeep(defaultContext), cloneDeep(_context));
     return newContext;
 }
 
