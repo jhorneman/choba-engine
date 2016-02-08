@@ -3,7 +3,7 @@ import { restartGame,
 import { buildContext,
          getRandomInt } from './context';
 import { expressionEvaluators } from './expressions/standardExpressionEvaluators';
-import { actionHandlers } from './actions';
+import { actionHandlers } from './standardActionHandlers';
 import { nullValue } from './types';
 import { getRandomlySelectedItemIndexByTags } from './tags';
 
