@@ -8,18 +8,6 @@ import { actionHandlers } from './standardActionHandlers';
 
 const defaultContext = {
     firstSceneId: 'start',
-    initialVars: {
-        currentSceneId: {
-            type: 'string',
-            value: '',
-            readOnly: true
-        },
-        previousSceneId: {
-            type: 'string',
-            value: '',
-            readOnly: true
-        }
-    },
     scenes: {},
     blocks: [],
     reportError: _message => console.error(_message),
@@ -28,8 +16,26 @@ const defaultContext = {
     actionHandlers: actionHandlers
 };
 
+const defaultInitialVars = {
+    currentSceneId: {
+        type: 'string',
+        value: '',
+        readOnly: true
+    },
+    previousSceneId: {
+        type: 'string',
+        value: '',
+        readOnly: true
+    }
+};
+
 export function buildContext(_context = {}) {
     let newContext = Object.assign({}, cloneDeep(defaultContext), cloneDeep(_context));
+    if (_context.hasOwnProperty('initialVars')) {
+        newContext.initialVars = Object.assign(newContext.initialVars, cloneDeep(defaultInitialVars));
+    } else {
+        newContext.initialVars = cloneDeep(defaultInitialVars);
+    }
     return newContext;
 }
 
