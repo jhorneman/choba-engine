@@ -1,6 +1,7 @@
 import expect from 'expect';
 import { handleAction,
-         handleGotoAction } from '../src/actions';
+         handleGotoAction,
+         handleRestartAction } from '../src/actions';
 import { setUpDynamicStateAndContextAndReportErrorSpy } from './testHelpers';
 
 
@@ -50,10 +51,42 @@ describe('goto action handling', () => {
     });
 
     // TODO: Write more tests for passing bad parameters. E.g. object, string.
-    it('handles goto actions correctly', () => {
+    it('handles goto action correctly', () => {
         let originalDynamicState = {currentSceneId: 'first'};
         let newDynamicState = handleGotoAction(['second'], originalDynamicState, context);
         expect(newDynamicState).toEqual({currentSceneId: 'second'});
-        expect(reportError.calls.length).toEqual(0);
+        expect(reportError).toNotHaveBeenCalled();
+    });
+});
+
+
+describe('restart action handling', () => {
+    let context, reportError;
+
+    beforeEach('set up common test variables', function() {
+        ({context, reportError} = setUpDynamicStateAndContextAndReportErrorSpy());
+    });
+
+    // TODO: Write more tests for passing bad parameters. E.g. object, string.
+    it('restarts correctly', () => {
+        let newDynamicState = handleRestartAction(undefined, undefined, context);
+        expect(reportError).toNotHaveBeenCalled();
+        expect(newDynamicState).toEqual({
+            currentSceneId: 'start',
+            previousSceneId: '',
+            tagState: {},
+            vars: {
+                currentSceneId: {
+                  readOnly: true,
+                  type: 'string',
+                  value: 'start'
+                },
+                previousSceneId: {
+                  readOnly: true,
+                  type: 'string',
+                  value: ''
+                }
+            }
+        });
     });
 });

@@ -26,6 +26,6 @@ export function handleGotoAction(_parameters, _dynamicState) {
     });
 }
 
-export function handleRestartAction() {
-    return getInitialDynamicState();
+export function handleRestartAction(_parameters, _dynamicState, _context) {
+    return getInitialDynamicState(_context);
 }
