@@ -1,6 +1,6 @@
 {
   "name": "choba-engine",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A choice-based interactive fiction engine.",
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
