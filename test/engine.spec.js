@@ -8,16 +8,24 @@ import { setUpDynamicStateAndContextAndReportErrorSpy } from './testHelpers';
 describe('engine', () => {
     let context, reportError;
 
-    beforeEach('set up common test variables', function() {
-        ({context, reportError} = setUpDynamicStateAndContextAndReportErrorSpy());
-    });
-
     it('can restart a game', () => {
         const sceneText = 'YAY!';
         const sceneDesc = {
             content: ['text', sceneText]
         };
-        context.scenes['start'] = sceneDesc;
+
+        context = {
+            scenes: {
+                start: sceneDesc
+            },
+            initialVars: {
+                test: {
+                    type: 'boolean',
+                    value: true
+                }
+            }
+        };
+        ({context, reportError} = setUpDynamicStateAndContextAndReportErrorSpy(context));
 
         let { newScene: firstScene, dynamicState: firstDynamicState } = restartGame(context);
 
@@ -32,6 +40,10 @@ describe('engine', () => {
             previousSceneId: '',
             tagState: {},
             vars: {
+                test : {
+                  type: 'boolean',
+                  value: true
+              },
                 currentSceneId: {
                   readOnly: true,
                   type: 'string',
@@ -56,6 +68,8 @@ describe('engine', () => {
         const endSceneDesc = {
             content: ['text', endSceneText]
         };
+
+        ({context, reportError} = setUpDynamicStateAndContextAndReportErrorSpy());
         context.scenes['start'] = startSceneDesc;
         context.scenes['end'] = endSceneDesc;
 
@@ -120,6 +134,8 @@ describe('engine', () => {
         const sceneDesc = {
             content: ['text', sceneText]
         };
+
+        ({context, reportError} = setUpDynamicStateAndContextAndReportErrorSpy());
         context.scenes['start'] = sceneDesc;
 
         let { newScene: firstScene, dynamicState: firstDynamicState } = restartGame(context);
