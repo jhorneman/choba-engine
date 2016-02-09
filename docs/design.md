@@ -26,9 +26,15 @@ This is counter-intuitive. Shouldn't an interactive storytelling engine be easy 
 
 There are many situations where I could have made the engine smarter, having it infer things from the data so that you need to write less boilerplate. But that would also have meant that the engine code and the possible valid forms of the data would have grown more complex. I have tried to keep the engine and the data format simple, because the data format is meant as an intermediate format. It should not only be simple to read, but also simple to write. It has no syntactic sugar, and that makes it easier to write parsers and converters.
 
+## Scene descriptions are expressions
+
+To build a scene, Choba evaluates an expression in a special run-time language. This language is inspired by Lisp (I don't know enough Lisp to really say more, and yes I know [Greenspun's Tenth Rule of Programming](http://www.c2.com/cgi/wiki?GreenspunsTenthRuleOfProgramming)). Expressions consist of arrays, the first element is the operator, values are typed. Choba's input data format is essentially an abstract syntax tree (AST).
+
+It's not a full language, but it may become more like one in the future. One of my key insights during the making of Mainframe was that if you look at scene building as evaluating an expression, you get a very powerful and flexible system. (The other insight was that we have a lot of tools for analyzing code: could these be used to make writing IF easier? My guess is yes.)
+
 ## Open and extensible
 
-I tried to make Choba like a simple set of tools that is easy to understand, rather than an opaque machine. I expect each game that uses Choba to want to extend it somehow. Choba can be used at multiple levels: from the writer/designer level (although we're not there yet), to the simple programming level, to heavy customization. This is tricky to pull off, and it's generally not a good idea to think too much about the future, so we will see how this works out.
+I tried to make Choba like a simple set of tools that is easy to understand, rather than like an opaque machine. I expect each game that uses Choba to want to extend it somehow. Choba can be used at multiple levels: from the writer/designer level (although we're not there yet), to the simple programming level, to heavy customization. This is tricky to pull off, and it's generally not a good idea to think too much about the future, so we will see how this works out.
 
 ## Functional
 
