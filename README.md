@@ -15,3 +15,10 @@ Choba (short for CHOice BAsed) is an experimental interactive storytelling engin
 * Choba is intended to be portable to many platforms and devices. It's written in JavaScript. It has extremely few external dependencies and doesn't manage its own state. This means it should be possible to port the engine to mobile (using React-Native) and desktop (using NW.js or Electron). It should also be reasonably easy to port the core engine to other languages.
 
 * The first version of Choba is not easy to use. It does not have a parser (!), or a standard way of handling input and output. In other words: out of the box, there is no easy way to either write or play games using Choba. It also does not include tools or easy ways to package games for distribution. It's an engine, not a game-making system. It is, in part, intended to be more useful to programmers than to game designers or writers. But at the same time it is hopefully the basis for a very powerful system for writing, distributing, and playing games.
+
+## Repos related to Choba
+
+* [choba-engine](https://github.com/jhorneman/choba-engine) - the engine.
+* [choba-parser](https://github.com/jhorneman/choba-engine) - the parser.
+* [choba-test](https://github.com/jhorneman/choba-engine) - a test project.
+* [choba-tracery](https://github.com/jhorneman/choba-tracery) - integrating Tracery into Choba.
