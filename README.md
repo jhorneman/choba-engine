@@ -2,6 +2,8 @@
 
 Choba (short for CHOice BAsed) is an experimental interactive storytelling engine written in JavaScript. It is intended to be used for choice-based interactive fiction (IF), and more.
 
+[![Build Status](https://travis-ci.org/jhorneman/choba-engine.svg?branch=master)](https://travis-ci.org/jhorneman/choba-engine)
+
 'Experimental' means:
 
 * Choba's inner workings are an experiment. Does it make sense to use something resembling a programming language inside a storytelling engine? Time will tell.
